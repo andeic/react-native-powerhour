@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "babel-eslint": "^8.2.3",
+    "babel-root-slash-import": "^1.1.0",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.9.1",
     "expo": "^27.0.1",
