@@ -17,17 +17,26 @@ const styles = StyleSheet.create({
   },
 });
 
-class Home extends Component {
+class HomeScreen extends Component {
   static navigationOptions = {
     headerTitle: 'Home',
   };
 
   render() {
-    return <View style={styles.container}>
-      <Text style={styles.superCopy}>Welcome to the</Text>
-      <Text style={styles.titleCopy}>KG Powerhour game extravaganza!</Text>
-    </View>;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home!</Text>
+        <Button
+          title="Go to Settings"
+          onPress={() => this.props.navigation.navigate('Settings')}
+        />
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
+        />
+      </View>
+    );
   }
 }
 
-export default Home;
+export default HomeScreen;

@@ -1,43 +1,45 @@
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import Home from '/screens/Home';
-import Game from '/screens/Game';
+import HomeScreen from '/screens/Home';
+import DetailsScreen from '/screens/Details';
+import SettingsScreen from '/screens/Settings';
 
-const screens = {
-  Home: {
-    screen: Home,
+const HomeStack = createStackNavigator({
+  Home: { screen: HomeScreen },
+  Details: { screen: DetailsScreen },
+});
+
+const SettingsStack = createStackNavigator({
+  Settings: { screen: SettingsScreen },
+});
+
+export default createBottomTabNavigator(
+  {
+    Home: { screen: HomeStack },
+    Settings: { screen: SettingsStack },
   },
-  Game: {
-    screen: Game,
-  },
-};
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        // const { routeName } = navigation.state;
+        // let iconName;
+        // if (routeName === 'Home') {
+        //   iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        // } else if (routeName === 'Settings') {
+        //   iconName = `ios-options${focused ? '' : '-outline'}`;
+        // }
 
-const config = {
-  initialRouteName: 'Home',
-  // navigationOptions: {
-  //   headerStyle: {
-  //     //backgroundColor: '#f4511e',
-  //   },
-  // },
-  navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, tintColor }) => {
-      // const { routeName } = navigation.state;
-      // let iconName;
-      // if (routeName === 'Home') {
-      //   iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-      // } else if (routeName === 'Settings') {
-      //   iconName = `ios-options${focused ? '' : '-outline'}`;
-      // }
-
-      // // You can return any component that you like here! We usually use an
-      // // icon component from react-native-vector-icons
-      // return <Ionicons name={iconName} size={25} color={tintColor} />;
+        // // You can return any component that you like here! We usually use an
+        // // icon component from react-native-vector-icons
+        // return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
     },
-  }),
-  tabBarOptions: {
-    activeTintColor: 'blue',
-    inactiveTintColor: 'gray',
-  },
-};
-
-export default createBottomTabNavigator(screens, config);
+    animationEnabled: false,
+    swipeEnabled: false,
+  }
+);
