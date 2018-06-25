@@ -7,14 +7,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  superCopy: {
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  titleCopy: {
-    fontSize: 32,
-    textAlign: 'center',
-  },
 });
 
 class HomeScreen extends Component {
@@ -24,16 +16,8 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
-        <Button
-          title="Go to Settings"
-          onPress={() => this.props.navigation.navigate('Settings')}
-        />
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
+      <View style={styles.container}>
+        <Text>Welcome!</Text>
       </View>
     );
   }

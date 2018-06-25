@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, StatusBar, Text, View, Platform } from 'react-native';
-import GameBoard from '/components/GameBoard';
+import GameBoard from '/common/GameBoard';
 
 const styles = StyleSheet.create({
   container: {

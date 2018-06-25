@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
 
-class DetailsScreen extends Component {
+class CardDetailsScreen extends Component {
   static navigationOptions = {
     headerTitle: 'Details',
+    tabBarVisible: false,
   };
 
   render() {
@@ -15,4 +16,4 @@ class DetailsScreen extends Component {
   }
 }
 
-export default DetailsScreen;
+export default CardDetailsScreen;

@@ -1,21 +1,27 @@
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import HomeScreen from '/screens/Home';
-import DetailsScreen from '/screens/Details';
+import CardDetailsScreen from '/screens/CardDetails';
+import CardListScreen from '/screens/CardList';
 import SettingsScreen from '/screens/Settings';
 
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },
-  Details: { screen: DetailsScreen },
 });
 
 const SettingsStack = createStackNavigator({
   Settings: { screen: SettingsScreen },
 });
 
+const CardStack = createStackNavigator({
+  CardList: { screen: CardListScreen },
+  CardDetails: { screen: CardDetailsScreen },
+});
+
 export default createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
+    CardList: { screen: CardStack },
     Settings: { screen: SettingsStack },
   },
   {
@@ -39,7 +45,5 @@ export default createBottomTabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
     },
-    animationEnabled: false,
-    swipeEnabled: false,
   }
 );
