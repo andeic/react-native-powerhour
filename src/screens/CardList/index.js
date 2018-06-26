@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, Text, ScrollView, FlatList, View } from 'react-native';
+import { StyleSheet, Button, Text, ScrollView, FlatList, View, Dimensions } from 'react-native';
+import autobind from 'autobind-decorator';
+import { isPortrait } from '/helpers/orientation';
 
 import Card from './Card';
 import { getCardList } from '/api/scryfall';
@@ -31,10 +33,22 @@ class CardListScreen extends Component {
     rarity: 'rare',
     set: 'zen',
     cards: [],
+    isPortrait: isPortrait(),
   };
 
+  constructor(props) {
+    super(props);
+
+    Dimensions.addEventListener('change', () => {
+      this.setState({
+        isPortrait: isPortrait(),
+      });
+    });
+  }
+
+  @autobind
   renderCard({ item }) {
-    return <Card name={item.name} imageUrl={item.image_uris.normal} id={item.id} />;
+    return <Card name={item.name} imageUrl={item.image_uris.normal} id={item.id} navigation={this.props.navigation} />;
   }
 
   componentDidMount() {
@@ -46,13 +60,16 @@ class CardListScreen extends Component {
   }
 
   render() {
+    let numPerColumn = this.state.isPortrait ? 2 : 4;
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Showing {this.state.rarity}s from {this.state.set}</Text>
 
         <FlatList
+          key={numPerColumn}
           horizontal={false}
-          numColumns={2}
+          numColumns={numPerColumn}
           data={this.state.cards}
           keyExtractor={card => card.id}
           renderItem={this.renderCard} />

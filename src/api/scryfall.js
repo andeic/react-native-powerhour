@@ -7,3 +7,11 @@ export function getCardList(set, rarity) {
       return resp.data;
     });
 }
+
+export function getCardDetails(id) {
+  return axios.get(`cards/${id}`)
+    .then(x => x.data)
+    .then(resp => {
+      return resp;
+    });
+}
