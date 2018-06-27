@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, Text, View, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Button, Text, View, ScrollView, Image, ActivityIndicator, Dimensions } from 'react-native';
 import autobind from 'autobind-decorator';
 
 import { getCardDetails } from '/api/scryfall';
@@ -51,9 +51,9 @@ class CardDetailsScreen extends Component {
 
   @autobind
   resizeImage(event) {
-    let { width } = event.nativeEvent.layout;
+    let { width } = Dimensions.get('window');
 
-    width -= 16;
+    width = width - 32;
 
     let height = Math.round(width * 1.39375);
 
@@ -84,22 +84,20 @@ class CardDetailsScreen extends Component {
     return <ScrollView style={styles.container}>
       <Image source={{ uri: card.image_uris.normal }}
         style={{ width: width, height: height, marginBottom: 16 }}
-        /* onLayout={this.resizeImage} */ />
+        onLayout={this.resizeImage} />
 
-      <View style={{ paddingBottom: 32 }}>
-        <Text style={styles.title}>Card Details</Text>
+      <Text style={styles.title}>Card Details</Text>
 
-        <TextLine title={'Set:'} copy={card.set_name} />
-        <TextLine title={'Collector Number:'} copy={card.collector_number} />
-        <TextLine title={'Rarity:'} copy={card.rarity} />
-        <TextLine title={'Price:'} copy={`$${card.usd}`} />
-        <TextLine title={'Artist:'} copy={card.artist} />
-        <TextLine title={'Reserved List:'} copy={card.reserved ? 'Yes' : 'No'} />
+      <TextLine title={'Set:'} copy={card.set_name} />
+      <TextLine title={'Collector Number:'} copy={card.collector_number} />
+      <TextLine title={'Rarity:'} copy={card.rarity} />
+      <TextLine title={'Price:'} copy={`$${card.usd}`} />
+      <TextLine title={'Artist:'} copy={card.artist} />
+      <TextLine title={'Reserved List:'} copy={card.reserved ? 'Yes' : 'No'} />
 
-        <Text style={styles.title}>Oracle Text</Text>
-        <Text>{card.oracle_text}</Text>
-        {/* card.legalities */}
-      </View>
+      <Text style={styles.title}>Oracle Text</Text>
+      <Text style={{ marginBottom: 32 }}>{card.oracle_text}</Text>
+      {/* card.legalities */}
     </ScrollView>;
   }
 }

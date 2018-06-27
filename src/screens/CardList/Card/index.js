@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, View, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
+import { StyleSheet, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import autobind from 'autobind-decorator';
 
 const styles = StyleSheet.create({
