@@ -5,6 +5,7 @@ import CardDetailsScreen from '/screens/CardDetails';
 import CardListScreen from '/screens/CardList';
 import SettingsScreen from '/screens/Settings';
 import GesturesScreen from '/screens/Gestures';
+import CameraScreen from '/screens/Camera';
 
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },
@@ -16,6 +17,7 @@ const GesturesStack = createStackNavigator({
 
 const SettingsStack = createStackNavigator({
   Settings: { screen: SettingsScreen },
+  Camera: { screen: CameraScreen },
 });
 
 const CardStack = createStackNavigator({

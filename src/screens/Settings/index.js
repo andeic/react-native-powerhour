@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Button, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Platform, Button, Image, View, TextInput } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import { FileSystem } from 'expo';
 
 import Menu from './Menu';
 
@@ -64,6 +65,12 @@ class SettingsScreen extends Component {
           value={''}
           keyboardType={'email-address'}
           onChangeText={(text) => this.setState({ email: text })} />
+
+        <Image source={{ uri: `${FileSystem.documentDirectory}photos/PH_photo_1.jpg` }} style={{ width: 200, height: 200, marginBottom: 24 }} />
+
+        <View style={{ marginBottom: 24 }}>
+          <Button onPress={() => this.props.navigation.navigate('Camera')} title='Open camera' />
+        </View>
 
         <Button onPress={() => this.save()} title='Save settings' />
       </View>
