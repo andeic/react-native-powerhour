@@ -4,9 +4,14 @@ import HomeScreen from '/screens/Home';
 import CardDetailsScreen from '/screens/CardDetails';
 import CardListScreen from '/screens/CardList';
 import SettingsScreen from '/screens/Settings';
+import GesturesScreen from '/screens/Gestures';
 
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },
+});
+
+const GesturesStack = createStackNavigator({
+  Gestures: { screen: GesturesScreen },
 });
 
 const SettingsStack = createStackNavigator({
@@ -22,6 +27,7 @@ export default createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
     CardList: { screen: CardStack },
+    Gestures: { screen: GesturesStack },
     Settings: { screen: SettingsStack },
   },
   {
