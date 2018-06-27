@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, Text, ScrollView, FlatList, View, Dimensions } from 'react-native';
-import autobind from 'autobind-decorator';
+import { StyleSheet, Text, RefreshControl, FlatList, View, Dimensions } from 'react-native';
 import { isPortrait } from '/helpers/orientation';
 
 import Card from './Card';
@@ -30,6 +29,7 @@ class CardListScreen extends Component {
   };
 
   state = {
+    refreshing: false,
     rarity: 'rare',
     set: 'zen',
     cards: [],
@@ -52,12 +52,28 @@ class CardListScreen extends Component {
     return <Card name={item.name} imageUrl={item.image_uris.normal} id={item.id} navigation={this.props.navigation} />;
   }
 
-  componentDidMount() {
-    getCardList(this.state.set, this.state.rarity).then(resp => {
+  _onRefresh = () => {
+    this.setState({
+      refreshing: true,
+    });
+
+    this.fetchData().then(() => {
+      this.setState({
+        refreshing: false,
+      });
+    });
+  }
+
+  fetchData() {
+    return getCardList(this.state.set, this.state.rarity).then(resp => {
       this.setState({
         cards: resp,
       });
     });
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {
@@ -65,7 +81,7 @@ class CardListScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Showing {this.state.rarity}s from {this.state.set}</Text>
+        <Text style={styles.title}>Showing {this.state.rarity}s from {this.state.set}{this.state.refreshing}</Text>
 
         <FlatList
           key={numPerColumn}
@@ -73,7 +89,13 @@ class CardListScreen extends Component {
           numColumns={numPerColumn}
           data={this.state.cards}
           keyExtractor={card => card.id}
-          renderItem={this.renderCard} />
+          renderItem={this.renderCard}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          } />
       </View>
     );
   }

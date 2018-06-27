@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Button, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Platform, Button, Text, View, TextInput } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 
 import Menu from './Menu';
@@ -54,13 +54,16 @@ class SettingsScreen extends Component {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder="First name"
-          onChangeText={(text) => this.setState({ first: text })} />
+          placeholder="Full name"
+          value={''}
+          onChangeText={(text) => this.setState({ name: text })} />
 
         <TextInput
           style={styles.input}
-          placeholder="Last name"
-          onChangeText={(text) => this.setState({ last: text })} />
+          placeholder="Email"
+          value={''}
+          keyboardType={'email-address'}
+          onChangeText={(text) => this.setState({ email: text })} />
 
         <Button onPress={() => this.save()} title='Save settings' />
       </View>
