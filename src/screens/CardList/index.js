@@ -44,9 +44,10 @@ class CardListScreen extends Component {
         isPortrait: isPortrait(),
       });
     });
+
+    this.renderCard = this.renderCard.bind(this);
   }
 
-  @autobind
   renderCard({ item }) {
     return <Card name={item.name} imageUrl={item.image_uris.normal} id={item.id} navigation={this.props.navigation} />;
   }

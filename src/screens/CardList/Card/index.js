@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import autobind from 'autobind-decorator';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +16,13 @@ const styles = StyleSheet.create({
 });
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+
+    this.setLoaded = this.setLoaded.bind(this);
+    this.goToDetails = this.goToDetails.bind(this);
+    this.resizeImage = this.resizeImage.bind(this);
+  }
 
   state = {
     loading: true,
@@ -24,21 +30,18 @@ class Card extends Component {
     height: 0,
   };
 
-  @autobind
   goToDetails() {
     let { navigation, id, name } = this.props;
 
     navigation.navigate('CardDetails', { id: id, name: name });
   }
 
-  @autobind
   setLoaded() {
     this.setState({
       loading: false,
     });
   }
 
-  @autobind
   resizeImage(event) {
     let { width } = event.nativeEvent.layout;
 

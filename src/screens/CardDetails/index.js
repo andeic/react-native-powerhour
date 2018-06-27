@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, Text, View, ScrollView, Image, ActivityIndicator, Dimensions } from 'react-native';
-import autobind from 'autobind-decorator';
 
 import { getCardDetails } from '/api/scryfall';
 
@@ -49,7 +48,6 @@ class CardDetailsScreen extends Component {
     height: 446,
   };
 
-  @autobind
   resizeImage(event) {
     let { width } = Dimensions.get('window');
 
@@ -84,7 +82,7 @@ class CardDetailsScreen extends Component {
     return <ScrollView style={styles.container}>
       <Image source={{ uri: card.image_uris.normal }}
         style={{ width: width, height: height, marginBottom: 16 }}
-        onLayout={this.resizeImage} />
+        onLayout={e => this.resizeImage(e)} />
 
       <Text style={styles.title}>Card Details</Text>
 
