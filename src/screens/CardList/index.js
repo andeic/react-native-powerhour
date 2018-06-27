@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, RefreshControl, FlatList, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, RefreshControl, FlatList, View, Dimensions, AsyncStorage } from 'react-native';
 import { isPortrait } from '/helpers/orientation';
 
 import Card from './Card';
@@ -64,10 +64,21 @@ class CardListScreen extends Component {
     });
   }
 
-  fetchData() {
-    return getCardList(this.state.set, this.state.rarity).then(resp => {
-      this.setState({
-        cards: resp,
+  async fetchData() {
+    let set = await AsyncStorage.getItem('PH_SET');
+    let rarity = await AsyncStorage.getItem('PH_RARITY');
+
+    set = set || 'LEA';
+    rarity = rarity || 'rare';
+
+    return this.setState({
+      set,
+      rarity,
+    }, () => {
+      return getCardList(this.state.set, this.state.rarity).then(resp => {
+        this.setState({
+          cards: resp,
+        });
       });
     });
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Button, Image, View, TextInput, AsyncStorage } from 'react-native';
+import { StyleSheet, Platform, Button, Image, View, TextInput, AsyncStorage, Picker } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { FileSystem } from 'expo';
 
@@ -48,6 +48,11 @@ class SettingsScreen extends Component {
     try {
       AsyncStorage.setItem('PH_NAME', this.state.name);
       AsyncStorage.setItem('PH_EMAIL', this.state.email);
+      AsyncStorage.setItem('PH_SET', this.state.set);
+
+      if (Platform.OS === 'android') {
+        AsyncStorage.setItem('PH_RARITY', this.state.rarity);
+      }
     } catch (error) {
       console.error('Error saving data');
     }
@@ -57,10 +62,14 @@ class SettingsScreen extends Component {
     try {
       const name = await AsyncStorage.getItem('PH_NAME');
       const email = await AsyncStorage.getItem('PH_EMAIL');
+      const set = await AsyncStorage.getItem('PH_SET');
+      const rarity = await AsyncStorage.getItem('PH_RARITY');
 
       this.setState({
         name,
         email,
+        set,
+        rarity,
       });
     } catch (error) {
       console.error('Error retrieving data');
@@ -88,6 +97,21 @@ class SettingsScreen extends Component {
           value={this.state.email}
           keyboardType={'email-address'}
           onChangeText={(text) => this.setState({ email: text })} />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Favourite set"
+          value={this.state.set}
+          onChangeText={(text) => this.setState({ set: text })} />
+
+        {Platform.OS === 'android' ? <Picker
+          selectedValue={this.state.rarity}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) => this.setState({ rarity: itemValue })}>
+          <Picker.Item label="Rare" value="rare" />
+          <Picker.Item label="Uncommon" value="uncommon" />
+          <Picker.Item label="Common" value="common" />
+        </Picker> : null}
 
         <Image source={{ uri: `${FileSystem.documentDirectory}photos/PH_photo_1.jpg` }} style={{ width: 200, height: 200, marginBottom: 24 }} />
 
