@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Button, Image, View, TextInput } from 'react-native';
+import { StyleSheet, Platform, Button, Image, View, TextInput, AsyncStorage } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { FileSystem } from 'expo';
 
@@ -44,8 +44,31 @@ class SettingsScreen extends Component {
     this.setState({ isOpen });
   }
 
-  save() {
+  async saveInfo() {
+    try {
+      AsyncStorage.setItem('PH_NAME', this.state.name);
+      AsyncStorage.setItem('PH_EMAIL', this.state.email);
+    } catch (error) {
+      console.error('Error saving data');
+    }
+  }
 
+  async getInfo() {
+    try {
+      const name = await AsyncStorage.getItem('PH_NAME');
+      const email = await AsyncStorage.getItem('PH_EMAIL');
+
+      this.setState({
+        name,
+        email,
+      });
+    } catch (error) {
+      console.error('Error retrieving data');
+    }
+  }
+
+  componentDidMount() {
+    this.getInfo();
   }
 
   render() {
@@ -56,13 +79,13 @@ class SettingsScreen extends Component {
         <TextInput
           style={styles.input}
           placeholder="Full name"
-          value={''}
+          value={this.state.name}
           onChangeText={(text) => this.setState({ name: text })} />
 
         <TextInput
           style={styles.input}
           placeholder="Email"
-          value={''}
+          value={this.state.email}
           keyboardType={'email-address'}
           onChangeText={(text) => this.setState({ email: text })} />
 
@@ -72,7 +95,7 @@ class SettingsScreen extends Component {
           <Button onPress={() => this.props.navigation.navigate('Camera')} title='Open camera' />
         </View>
 
-        <Button onPress={() => this.save()} title='Save settings' />
+        <Button onPress={() => this.saveInfo()} title='Save settings' />
       </View>
     </SideMenu>;
   }
