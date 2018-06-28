@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "Powerhour Extravaganza",
+    "icon": "./assets/appicon.png",
+    "version": "0.1",
+    "slug": "powerhour-extravaganza",
+    "ios": {
+      "bundleIdentifier": "com.konradgroup.powerhourextravaganza"
+    },
+    "android": {
+      "package": "com.konradgroup.powerhourextravaganza"
+    }
   }
 }
