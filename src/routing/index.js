@@ -1,11 +1,11 @@
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import HomeScreen from '/screens/Home';
-import CardDetailsScreen from '/screens/CardDetails';
-import CardListScreen from '/screens/CardList';
-import SettingsScreen from '/screens/Settings';
-import GesturesScreen from '/screens/Gestures';
-import CameraScreen from '/screens/Camera';
+import HomeScreen from '../screens/Home';
+import CardDetailsScreen from '../screens/CardDetails';
+import CardListScreen from '../screens/CardList';
+import SettingsScreen from '../screens/Settings';
+import GesturesScreen from '../screens/Gestures';
+import CameraScreen from '../screens/Camera';
 
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen },

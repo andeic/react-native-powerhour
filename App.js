@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import RootStack from '/routing';
+import RootStack from './src/routing';
 
 axios.defaults.baseURL = 'https://api.scryfall.com/';
 

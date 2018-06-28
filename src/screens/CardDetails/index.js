@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, Text, View, ScrollView, Image, ActivityIndicator, Dimensions } from 'react-native';
 
-import { getCardDetails } from '/api/scryfall';
+import { getCardDetails } from '../../api/scryfall';
 
 const styles = StyleSheet.create({
   container: {

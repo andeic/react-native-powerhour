@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, RefreshControl, FlatList, View, Dimensions, AsyncStorage } from 'react-native';
-import { isPortrait } from '/helpers/orientation';
+import { isPortrait } from '../../helpers/orientation';
 
 import Card from './Card';
-import { getCardList } from '/api/scryfall';
+import { getCardList } from '../../api/scryfall';
 
 const styles = StyleSheet.create({
   container: {
